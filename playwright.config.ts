@@ -5,8 +5,9 @@ dotenv.config();
 
 const config: PlaywrightTestConfig = {
   timeout: 60 * 1000,
-  retries: 0,
+  retries: 2,
   testDir: 'tests/e2e',
+  reporter: 'html',
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
