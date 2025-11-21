@@ -9,9 +9,9 @@ const selectors = {
 };
 
 export class InventoryPage extends BasePage {
-  inventoryContainer: Locator;
   inventoryList: InventoryList;
-  sortingDropdown: Locator;
+  private readonly inventoryContainer: Locator;
+  private readonly sortingDropdown: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -26,7 +26,7 @@ export class InventoryPage extends BasePage {
 
   async addProductToCart(productName: string) {
     const item = await this.inventoryList.getItemByName(productName);
-    await item.addToCartButton.click();
+    await item.addToCartButtonClick();
   }
 
   async waitForContainerVisible() {
@@ -35,6 +35,6 @@ export class InventoryPage extends BasePage {
 
   async openInventoryItem(name: string) {
     const inventoryItem = await this.inventoryList.getItemByName(name);
-    await inventoryItem.label.click();
+    await inventoryItem.getLabel();
   }
 }

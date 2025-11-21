@@ -4,9 +4,10 @@ import { products } from '../../data/products';
 
 test.describe.parallel('Product Page', () => {
   test.beforeEach(async ({ inventoryPage }) => {
-    await inventoryPage.inventoryList
-      .getItemByName(products.backpack.name)
-      .then((item) => item?.label.click());
+    const backpack = await inventoryPage.inventoryList.getItemByName(
+      products.backpack.name,
+    );
+    await backpack.openProductPage();
   });
 
   test('product label, description and price should be displayed', async ({
@@ -34,20 +35,20 @@ test.describe.parallel('Product Page', () => {
   test('add to cart button exists and changes label when adding or removing product', async ({
     productPage,
   }) => {
-    await expect(productPage.addToCartButton).toBeVisible();
-    expect(await productPage.addToCartButton.textContent()).toBe('Add to cart');
-    await productPage.addToCartButton.click();
-    expect(await productPage.addToCartButton.textContent()).toBe('Remove');
-    await productPage.addToCartButton.click();
-    expect(await productPage.addToCartButton.textContent()).toBe('Add to cart');
+    await productPage.verifyAddToCartButtonVisible();
+    await productPage.verifyAddToCartButtonText('Add to cart');
+    await productPage.addToCartButtonClick();
+    await productPage.verifyAddToCartButtonText('Remove');
+    await productPage.addToCartButtonClick();
+    await productPage.verifyAddToCartButtonText('Add to cart');
   });
 
   test('add to cart button adds product to cart', async ({
     productPage,
     shoppingCartPage,
   }) => {
-    await productPage.addToCartButton.click();
-    await productPage.topBar.shoppingCartButton.click();
+    await productPage.addToCartButtonClick();
+    await productPage.topBar.openShoppingCart();
     await shoppingCartPage.verifyCartContent([products.backpack.name]);
   });
 
@@ -55,10 +56,10 @@ test.describe.parallel('Product Page', () => {
     productPage,
   }) => {
     await productPage.topBar.verifyShoppingCartBadgeHidden();
-    await productPage.addToCartButton.click();
+    await productPage.addToCartButtonClick();
     await productPage.topBar.verifyShoppingCartBadgeVisible();
     await productPage.topBar.verifyShoppingCartBadgeValue(1);
-    await productPage.addToCartButton.click();
+    await productPage.addToCartButtonClick();
     await productPage.topBar.verifyShoppingCartBadgeHidden();
   });
 
@@ -66,7 +67,7 @@ test.describe.parallel('Product Page', () => {
     productPage,
     inventoryPage,
   }) => {
-    await productPage.backToProductsButton.click();
-    await expect(inventoryPage.inventoryContainer).toBeVisible();
+    await productPage.backToProducts();
+    await inventoryPage.waitForContainerVisible();
   });
 });

@@ -82,10 +82,10 @@ test.describe.parallel('Inventory Page', () => {
     const item = await inventoryPage.inventoryList.getItemByName(
       products.backpack.name,
     );
-    await item.label.click();
+    await item.openProductPage();
     await productPage.waitForLoad();
     await productPage.verifyProductLabel(products.backpack.name);
-    await productPage.backToProductsButton.click();
-    await expect(inventoryPage.inventoryContainer).toBeVisible();
+    await productPage.backToProducts();
+    await inventoryPage.waitForContainerVisible();
   });
 });

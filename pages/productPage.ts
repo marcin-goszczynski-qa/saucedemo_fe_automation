@@ -12,13 +12,13 @@ const selectors = {
 };
 
 export class ProductPage extends BasePage {
-  backToProductsButton: Locator;
-  detailsContainer: Locator;
-  productLabel: Locator;
-  image: Locator;
-  productDescription: Locator;
-  productPrice: Locator;
-  addToCartButton: Locator;
+  private readonly backToProductsButton: Locator;
+  private readonly detailsContainer: Locator;
+  private readonly productLabel: Locator;
+  private readonly image: Locator;
+  private readonly productDescription: Locator;
+  private readonly productPrice: Locator;
+  private readonly addToCartButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -58,5 +58,17 @@ export class ProductPage extends BasePage {
   async waitForLoad() {
     await expect(this.image).toBeVisible();
     await this.page.waitForLoadState('networkidle');
+  }
+
+  async verifyAddToCartButtonText(expectedText: string) {
+    await expect(this.addToCartButton).toHaveText(expectedText);
+  }
+
+  async addToCartButtonClick() {
+    await this.addToCartButton.click();
+  }
+
+  async verifyAddToCartButtonVisible() {
+    await expect(this.addToCartButton).toBeVisible();
   }
 }

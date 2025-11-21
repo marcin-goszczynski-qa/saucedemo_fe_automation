@@ -9,12 +9,12 @@ const selectors = {
 };
 
 export class InventoryCard {
-  container: Locator;
-  label: Locator;
-  image: Locator;
-  description: Locator;
-  price: Locator;
-  addToCartButton: Locator;
+  private readonly container: Locator;
+  private readonly label: Locator;
+  private readonly image: Locator;
+  private readonly description: Locator;
+  private readonly price: Locator;
+  private readonly addToCartButton: Locator;
 
   constructor(cardContainer: Locator) {
     this.container = cardContainer;
@@ -48,5 +48,13 @@ export class InventoryCard {
 
   async addToCartButtonClick() {
     await this.addToCartButton.click();
+  }
+
+  async openProductPage() {
+    await this.label.click();
+  }
+
+  async getLabel() {
+    return await this.label.textContent();
   }
 }

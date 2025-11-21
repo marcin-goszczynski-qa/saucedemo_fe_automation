@@ -7,13 +7,13 @@ const selectors = {
 };
 
 export class MenuPage {
-  page: Page;
-  menuContainer: Locator;
-  closeButton: Locator;
-  allItemsButton: Locator;
-  aboutButton: Locator;
-  logoutButton: Locator;
-  resetAppStateButton: Locator;
+  private readonly page: Page;
+  private readonly menuContainer: Locator;
+  private readonly closeButton: Locator;
+  private readonly allItemsButton: Locator;
+  private readonly aboutButton: Locator;
+  private readonly logoutButton: Locator;
+  private readonly resetAppStateButton: Locator;
 
   constructor(page: Page) {
     this.page = page;

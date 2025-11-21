@@ -3,9 +3,9 @@ import { TopBarPage } from './basePageComponents/topBarPage';
 import { MenuPage } from './basePageComponents/menuPage';
 
 export class BasePage {
-  page: Page;
   topBar: TopBarPage;
   menu: MenuPage;
+  protected readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;

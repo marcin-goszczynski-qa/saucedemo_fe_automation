@@ -12,11 +12,11 @@ const selectors = {
 
 export class ShoppingCartPage extends BasePage {
   shoppingCartList: CartList;
-  root: Locator;
-  quantityLabel: Locator;
-  descriptionLabel: Locator;
-  continueShoppingButton: Locator;
-  checkoutButton: Locator;
+  private readonly root: Locator;
+  private readonly quantityLabel: Locator;
+  private readonly descriptionLabel: Locator;
+  private readonly continueShoppingButton: Locator;
+  private readonly checkoutButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -34,7 +34,7 @@ export class ShoppingCartPage extends BasePage {
     const cartItems = await this.shoppingCartList.getItems();
     expect(cartItems.length).toBe(expectedLabels.length);
     for (let i = 0; i < expectedLabels.length; i++) {
-      await expect(cartItems[0].label).toHaveText(expectedLabels[i]);
+      await cartItems[i].verifyLabel(expectedLabels[i]);
     }
   }
 }

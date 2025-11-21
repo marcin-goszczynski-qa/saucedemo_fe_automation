@@ -11,13 +11,13 @@ const selectors = {
 };
 
 export class TopBarPage {
-  page: Page;
-  root: Locator;
-  menuButton: Locator;
   menu: MenuPage;
-  logo: Locator;
-  shoppingCartButton: Locator;
-  shoppingCardBadge: Locator;
+  private readonly page: Page;
+  private readonly root: Locator;
+  private readonly menuButton: Locator;
+  private readonly logo: Locator;
+  private readonly shoppingCartButton: Locator;
+  private readonly shoppingCardBadge: Locator;
 
   constructor(page: Page) {
     this.page = page;

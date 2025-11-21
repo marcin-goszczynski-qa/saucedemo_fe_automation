@@ -6,8 +6,8 @@ const selectors = {
 };
 
 export class InventoryList {
-  root: Locator;
-  list: Locator;
+  private readonly root: Locator;
+  private readonly list: Locator;
 
   constructor(root: Locator) {
     this.root = root;
@@ -22,7 +22,7 @@ export class InventoryList {
   async getItemByName(name: string) {
     const items = await this.getItems();
     const labels = await Promise.all(
-      items.map(async (item) => await item.label.textContent()),
+      items.map(async (item) => await item.getLabel()),
     );
     let foundIndex = -1;
     labels.forEach((label, index) => {
