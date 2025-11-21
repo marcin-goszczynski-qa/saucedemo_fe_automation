@@ -1,4 +1,7 @@
-import { PlaywrightTestConfig } from '@playwright/test'
+import { PlaywrightTestConfig } from '@playwright/test';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const config: PlaywrightTestConfig = {
   timeout: 60 * 1000,
@@ -31,10 +34,10 @@ const config: PlaywrightTestConfig = {
     },
     {
       name: 'visual',
-      use: {browserName: 'chromium', headless: false},
+      use: { browserName: 'chromium', headless: false },
       grep: /@visual/,
-    }
+    },
   ],
-}
+};
 
-export default config
+export default config;
