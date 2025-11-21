@@ -35,6 +35,6 @@ export class InventoryPage extends BasePage {
 
   async openInventoryItem(name: string) {
     const inventoryItem = await this.inventoryList.getItemByName(name);
-    await inventoryItem.getLabel();
+    await inventoryItem.openProductPage();
   }
 }
